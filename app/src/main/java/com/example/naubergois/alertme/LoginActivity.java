@@ -332,7 +332,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,
     @Override
     public void onConnected(Bundle bundle) {
         Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-
+        String nickName=currentUser.getNickname();
         String user=currentUser.getName().getGivenName();
         String dataNascimento=currentUser.getBirthday();
         int gender=currentUser.getGender();
@@ -341,11 +341,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,
         String aboutMe=currentUser.getAboutMe();
         List<Person.PlacesLived> places;
         StringBuffer buffer=new StringBuffer();
-        places = currentUser.getPlacesLived();
-        for (Person.PlacesLived placed :places){
-            buffer.append(placed.getValue());
 
-        }
         String placesString=buffer.toString();
         String location=currentUser.getCurrentLocation();
         String url=currentUser.getUrl();
