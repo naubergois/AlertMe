@@ -36,6 +36,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.People.LoadPeopleResult;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -330,6 +331,26 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,
 
     @Override
     public void onConnected(Bundle bundle) {
+        Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+
+        String user=currentUser.getName().getGivenName();
+        String dataNascimento=currentUser.getBirthday();
+        int gender=currentUser.getGender();
+        String language=currentUser.getLanguage();
+        currentUser.getCircledByCount();
+        String aboutMe=currentUser.getAboutMe();
+        List<Person.PlacesLived> places;
+        StringBuffer buffer=new StringBuffer();
+        places = currentUser.getPlacesLived();
+        for (Person.PlacesLived placed :places){
+            buffer.append(placed.getValue());
+
+        }
+        String placesString=buffer.toString();
+        String location=currentUser.getCurrentLocation();
+        String url=currentUser.getUrl();
+
+
 
     }
 
